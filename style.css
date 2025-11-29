@@ -1,0 +1,164 @@
+/* --- General Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #210344;
+    /* Main background color */
+}
+
+/* --- Header Layout --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: transparent;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 70px;
+    width: 120px;
+}
+
+/* --- Navigation List Styling --- */
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* We set 'relative' here so the main dropdown knows where to start */
+.nav-links li {
+    position: relative;
+}
+
+/* Styling for the links (Home, Who are we, Tracks) */
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: block;
+    padding: 10px;
+}
+
+.nav-links a:hover {
+    color: #7839e3;
+}
+
+/* --- Dropdown Styling (Level 1) --- */
+
+/* The arrow next to "Tracks" */
+.arrow {
+    font-size: 12px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+/* The arrow inside "Web Development" (Moved to left side) */
+.side-arrow {
+    font-size: 10px;
+    margin-right: 10px;
+    /* Adds space between arrow and text */
+    display: inline-block;
+}
+
+/* The Main Dropdown Menu (Hidden by default) */
+.dropdown-menu {
+    display: none;
+    /* Hidden until active */
+    position: absolute;
+    top: 100%;
+    /* Places it directly below "Tracks" */
+    right: 0;
+    /* Aligns it to the right edge */
+    background-color: #1a0235;
+    /* Slightly darker purple */
+    min-width: 220px;
+    list-style: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+/* This is vital! It allows the sub-menu to position itself relative to this item */
+.dropdown-menu li {
+    position: relative;
+}
+
+/* Styling for items inside the dropdown */
+.dropdown-menu li a {
+    padding: 15px;
+    font-size: 16px;
+    border-bottom: 1px solid #2d045e;
+    display: block;
+    /* Makes the whole area clickable */
+}
+
+.dropdown-menu li a:hover {
+    background-color: #2d045e;
+}
+
+/* --- Sub-Menu Styling (Level 2) --- */
+
+.submenu {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 0;
+    right: 100%;
+    /* 100% pushes it completely to the LEFT of the parent */
+
+    background-color: #0f011f;
+    /* Darkest purple for hierarchy */
+    min-width: 180px;
+    list-style: none;
+    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+
+    /* We add a small visual margin */
+    margin-right: 2px;
+}
+
+/* --- THE FIX: The Invisible Bridge --- */
+/* This creates an invisible block connecting the two menus so the mouse doesn't "fall" into the gap */
+.submenu::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -25px;
+    /* Extends 25px to the right to touch the parent menu */
+    width: 25px;
+    /* Width of the invisible bridge */
+    height: 100%;
+    background: transparent;
+    /* Invisible */
+}
+
+
+/* --- Interaction Classes --- */
+
+/* Show the submenu when hovering over the "Web Development" li */
+.sub-dropdown-item:hover .submenu {
+    display: block;
+}
+
+/* Show the main menu when Javascript adds the 'active' class */
+/* .dropdown-item.active .dropdown-menu {
+    display: block;
+} */
+.dropdown-item:hover .dropdown-menu {
+    display: block;
+}
